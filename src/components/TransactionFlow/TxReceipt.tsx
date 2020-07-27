@@ -58,12 +58,7 @@ import { constructCancelTxQuery, constructSpeedUpTxQuery } from '@utils/queries'
 import { makeFinishedTxReceipt } from '@utils/transaction';
 import { path } from '@vendor';
 
-import {
-  FromToAccount,
-  RecipientAccount,
-  SwapFromToDiagram,
-  TransactionDetailsDisplay
-} from './displays';
+import { FromToAccount, SwapFromToDiagram, TransactionDetailsDisplay } from './displays';
 import TxIntermediaryDisplay from './displays/TxIntermediaryDisplay';
 import { calculateReplacementGasPrice, constructSenderFromTxConfig } from './helpers';
 import { PendingTransaction } from './PendingLoader';
@@ -363,7 +358,7 @@ export const TxReceiptUI = ({
           <MembershipReceiptBanner membershipSelected={membershipSelected} />
         </div>
       )}
-      {txType !== ITxType.PURCHASE_MEMBERSHIP && txType !== ITxType.FAUCET && (
+      {txType !== ITxType.PURCHASE_MEMBERSHIP && (
         <>
           <FromToAccount
             networkId={sender.network.id}
@@ -374,16 +369,6 @@ export const TxReceiptUI = ({
             toAccount={{
               address: (receiverAddress || (displayTxReceipt && displayTxReceipt.to)) as TAddress,
               addressBookEntry: recipientContact
-            }}
-          />
-        </>
-      )}
-      {txType === ITxType.FAUCET && (
-        <>
-          <RecipientAccount
-            to={{
-              address: (receiverAddress || (displayTxReceipt && displayTxReceipt.to)) as TAddress,
-              label: recipientLabel
             }}
           />
         </>
